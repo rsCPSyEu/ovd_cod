@@ -2,19 +2,21 @@
 
 
 ## Overview
-This repository hosts the dataset links and evaluation code for **"Open-vocabulary vs. Closed-set: Best Practice for Few-shot Object Detection Considering Text Describability"**. This code is essential for 
-reproducing the results presented in our research or for further development and testing.
+This repository hosts the dataset links and evaluation code for **"Open-vocabulary vs. Closed-set: Best Practice for Few-shot Object Detection Considering Text Describability"**. 
+
 
 ## Datasets
 We repurpose existing **ODinW (Object Detection in the Wild)** datasets, using the images without any modifications. To download the images and original annotations, please follow the instructions provided to access each original resource.
 For more details of the datasets, please refer to the original papers, [GLIP](https://arxiv.org/abs/2112.03857) and [ELEVATER](https://arxiv.org/abs/2204.08790). 
 
-#### Download Original Dataset Resoueces
-To download original datasets, please follow the instrution provided by official repositry of [GLIP](https://github.com/microsoft/GLIP).
 
-#### Donload Annotations for Our Few-shot Samples 
+### Download Original Dataset Resoueces
+To download original datasets, i.e., **ODinW (Object Detection in the Wild)**, please follow the instrution provided by official repositry of [GLIP's official repositry](https://github.com/microsoft/GLIP).
+
+
+### Donload Annotations for Our Few-shot Samples 
 For evaluation of few-shot object detection performance, we repeat a sampling process five times using different random seeds. 
-Please access [this link]() to download each annotation file with different random seed.
+Please access [this link](https://www.dropbox.com/home/Dataset/OVD_COD) to download each annotation file with different random seed.
 
 
 <!-- ## How to Use
@@ -38,7 +40,6 @@ cub200 = COCO('path/to/annotaion/t1_train.json') # this instance can be used as 
 ```
 Please install pycocotools in advance using `pip install pycocotools` or `conda install -c conda-forge pycocotools`. -->
 
----
 
 ## Evaluation Code
 The evaluation code will be made available soon.
@@ -145,7 +146,6 @@ To evaluate our models, run the following command;
 python tools/train_net.py --num_gpus 8 --config-file path/to/configfile --eval-only MODEL.WEIGHTS path/to/model
 </pre> -->
 
----
 
 ## License
 Please refer to the license provided by the original resource for more details. You can check the information [here](https://public.roboflow.com/object-detection).
