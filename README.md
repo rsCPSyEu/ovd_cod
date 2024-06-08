@@ -15,8 +15,24 @@ To download original datasets, i.e., **ODinW (Object Detection in the Wild)**, p
 
 
 ### Donload Annotations for Our Few-shot Samples 
-For evaluation of few-shot object detection performance, we repeat a sampling process five times using different random seeds. 
-Please access [this link](https://www.dropbox.com/home/Dataset/OVD_COD) to download each annotation file with different random seed.
+
+Please visit our [dropbox](https://www.dropbox.com/scl/fo/whq4j0y0ufgw34nfcnkos/AApCuBXnoiYjmXY_1LuTBJM?rlkey=97ztykstc0iln9sfwevphdwqp&st=xyip9xqi&dl=0) to download the corresponding annotation file for each random seed.
+
+The folder structure is as follows:
+
+<pre>
+
+── Dataset
+    ├── aerial_maritime_drone_large
+    │   ├── train_shot_1_seed_0.png
+    │   ├── train_shot_3_seed_0.png
+    │   ├── train_shot_5_seed_0.png
+    │   ├── train_shot_10_seed_0.png
+    │   └── ...
+    │
+    └── ...
+</pre>
+
 
 
 <!-- ## How to Use
