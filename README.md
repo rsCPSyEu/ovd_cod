@@ -38,7 +38,7 @@ The folder structure is as follows:
 </pre>
 
 
-Then, put the files under ```datasets/odinw/fewshot_annotation_v1``` such as;
+<!-- Then, put the files under ```datasets/odinw/fewshot_annotation_v1``` such as;
 <pre>
 ── datasets
     └── odinw
@@ -51,7 +51,7 @@ Then, put the files under ```datasets/odinw/fewshot_annotation_v1``` such as;
             │   └── ...
             ├── aquarium
             └── ...
-</pre>
+</pre> -->
 
 
 ## Evaluation
@@ -90,10 +90,10 @@ conda install setuptools=59.5.0 -c conda-forge
 ### Run evaluation
 To evaluate the finetuning results with test data, follow the instruction below.
 
-- For the number of few-shot samples, choose one from ["1_200_8", "3_200_4", "5_200_2", "10_200_1"] and set it to ```shot```.
+- For the number of few-shot samples, select one from ["1_200_8", "3_200_4", "5_200_2", "10_200_1"] and set it to ```shot```.
 - For task configuration, see ```configs/odinw_configs.txt``` and set the config path to ```task_config```.
-- For random seeds for few-shot setting, choose one from [0,1,2,3,4] and set ```run_seedv1```.
-- For finetuned weight, please donwload from here and set the correct path to ```weight```.
+- For random seeds for few-shot sampling, select one from [0,1,2,3,4] and set ```run_seedv1```.
+- For finetuned weight, please donwload from [here]() and set the correct path to ```weight```.
 
 Then, run the following;
 <pre>
@@ -103,7 +103,7 @@ shot=1_200_8 # 1shot
 # shot=10_200_1 # 10shot
 IFS='_' read -r s epoch c <<< "$shot"
 
-run_seedv1=0 # choose from [0,1,2,3,4]
+run_seedv1=0 # select from [0,1,2,3,4]
 
 # Specify a dataset you want to evaluate. See configs/odinw_configs.txt.
 # Example: use 'aquarium' dataset
@@ -134,4 +134,4 @@ FEWSHOT.RUN_SEEDv1 ${run_seedv1}
 
 
 ## License
-Please refer to the license provided by the original datasets. You can check the information [here](https://public.roboflow.com/object-detection).
+Please refer to the license provided by the original datasets. You can check the information provided by [roboflow](https://public.roboflow.com/object-detection).
