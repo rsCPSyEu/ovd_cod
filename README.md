@@ -38,4 +38,4 @@ The evaluation code will be made available soon.
 
 
 ## License
-Please refer to the license provided by the original resource for more details. You can check the information [here](https://public.roboflow.com/object-detection).
+Please refer to the license provided by the original datasets. You can check the information [here](https://public.roboflow.com/object-detection).
