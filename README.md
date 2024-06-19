@@ -54,7 +54,7 @@ Then, put the files under ```datasets/odinw/fewshot_annotation_v1``` such as;
 </pre>
 
 
-## Evaluation Code
+## Evaluation
 
 <!-- The evaluation code will be made available soon. -->
 We also provide our evaluation codes. 
@@ -79,8 +79,57 @@ pip install scipy
 pip install pycocotools
 pip install opencv-python
 
-# assert that CUDA_HOME is set as /[HOME]/anaconda3/envs/${env_name}
-python setup.py build develop --user
+# install detectron2
+python -m pip install detectron2 -f https://dl.fbaipublicfiles.com/detectron2/wheels/cu111/torch1.10/index.html
+python -m pip install -e .
+
+conda install setuptools=59.5.0 -c conda-forge
+
+</pre>
+
+### Run evaluation
+To evaluate the finetuning results with test data, follow the instruction below.
+
+- For the number of few-shot samples, choose one from ["1_200_8", "3_200_4", "5_200_2", "10_200_1"] and set it to ```shot```.
+- For task configuration, see ```configs/odinw_configs.txt``` and set the config path to ```task_config```.
+- For random seeds for few-shot setting, choose one from [0,1,2,3,4] and set ```run_seedv1```.
+- For finetuned weight, please donwload from here and set the correct path to ```weight```.
+
+Then, run the following;
+<pre>
+shot=1_200_8 # 1shot
+# shot=3_200_4 # 3shot
+# shot=5_200_2 # 5shot
+# shot=10_200_1 # 10shot
+IFS='_' read -r s epoch c <<< "$shot"
+
+run_seedv1=0 # choose from [0,1,2,3,4]
+
+# Specify a dataset you want to evaluate. See configs/odinw_configs.txt.
+# Example: use 'aquarium' dataset
+task_config=configs/odinw_35/Aquarium_Aquarium_Combined.v2-raw-1024.coco.yaml
+
+weight=/path/to/finetuned/weight
+
+output_dir=/path/to/output/dir
+
+DETECTRON2_DATASETS=datasets \
+python tools/finetune.py \
+--config configs/fewshot/odinw/_base_fullft.yaml \
+--num-gpus 4 \
+--resume \
+--dist-url tcp://127.0.0.1:29500 \
+--eval_only
+FEWSHOT.BASE_CONFIG ${task_config} \
+FEWSHOT.SHOT_EPOCH_COPY ${s},${epoch},${c} \
+FEWSHOT.FREEZE_METHOD full_ft \
+MODEL.WEIGHTS ${weight} \
+SOLVER.IMS_PER_BATCH 4 \
+SEED 42 \
+SOLVER.AUTO_TERMINATE_PATIENCE 8 \
+TEST.EVAL_EPOCH 1 \
+OUTPUT_DIR ${output_dir} \
+FEWSHOT.RUN_SEEDv1 ${run_seedv1}
 </pre>
 
 
