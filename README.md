@@ -6,12 +6,17 @@ This repository hosts the dataset links and evaluation code for **"Open-vocabula
 
 
 ## Datasets
-We repurpose existing **ODinW (Object Detection in the Wild)** datasets, using the images without any modifications. To download the images and original annotations, please follow the instructions provided to access each original resource.
+We repurpose existing **ODinW (Object Detection in the Wild)** datasets. 
 For more details of the datasets, please refer to the original papers, [GLIP](https://arxiv.org/abs/2112.03857) and [ELEVATER](https://arxiv.org/abs/2204.08790). 
 
 
-### Download Original Dataset Resoueces
-To download original datasets, i.e., **ODinW (Object Detection in the Wild)**, please follow the instrution provided by official repositry of [GLIP's official repositry](https://github.com/microsoft/GLIP).
+### Download Original Datasets
+To download original ODinW datasets, run the following command; 
+
+<pre>
+mkdir ./datasets
+python download.py --dataset_path ./datasets/odinw
+</pre>
 
 
 ### Donload Annotations for Our Few-shot Samples 
@@ -34,7 +39,11 @@ The folder structure is as follows:
 </pre>
 
 ## Evaluation Code
+
+
+
 The evaluation code will be made available soon.
+
 
 
 ## License
