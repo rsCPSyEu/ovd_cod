@@ -55,7 +55,33 @@ Then, put the files under ```datasets/odinw/fewshot_annotation_v1``` such as;
 
 
 ## Evaluation Code
-The evaluation code will be made available soon.
+
+<!-- The evaluation code will be made available soon. -->
+We also provide our evaluation codes. 
+
+### Installation
+
+Our implementation is based on repositories of [Detectron2](https://github.com/facebookresearch/detectron2) and [DyHead](https://github.com/microsoft/DynamicHead).  
+
+- Setup conda environment
+
+<pre>
+env_name=ovd_cod
+conda create -n ${env_name} python=3.8 -y
+conda activate ${env_name}
+
+conda install pytorch=1.10 torchvision torchaudio -c pytorch -y 
+conda install -c conda-forge cudatoolkit-dev -y
+conda install -c anaconda nltk numpy=1.23.1 -y
+pip install einops shapely timm yacs tensorboardX ftfy prettytable pymongo
+pip install transformers==4.19
+pip install scipy
+pip install pycocotools
+pip install opencv-python
+
+# assert that CUDA_HOME is set as /[HOME]/anaconda3/envs/${env_name}
+python setup.py build develop --user
+</pre>
 
 
 ## License
