@@ -1,0 +1,36 @@
+_BASE_: "Base-RCNN-FPN.yaml" # based on FasterRCNN + FPN architecture
+MODEL:
+  META_ARCHITECTURE: "GeneralizedRCNN"
+  WEIGHTS: "./checkpoints/swin_tiny_patch4_window7_224_d2.pth"
+  PIXEL_MEAN: [123.675, 116.28, 103.53]
+  PIXEL_STD: [58.395, 57.12, 57.375]
+  BACKBONE:
+    NAME: "build_swint_fpn_backbone"
+  SWINT:
+    OUT_FEATURES: ["stage2", "stage3", "stage4", "stage5"]
+  FPN:
+    IN_FEATURES: ["stage2", "stage3", "stage4", "stage5"]
+  ROI_HEADS:
+    NUM_CLASSES: 365 # no need to add background class
+DATASETS:
+  # TRAIN: ("coco_2017_train",)
+  # TEST: ("coco_2017_val",)
+  TRAIN: ("object365_06m_train",) # train on object365
+  TEST: ("object365_06m_val",) # eval on object365
+SOLVER:
+  # [dyhead setting]
+  BASE_LR: 0.0001
+  WEIGHT_DECAY: 0.05
+  WEIGHT_DECAY_BIAS: 0.05 # [fix error whten optimize]
+  # IMS_PER_BATCH: 32
+  # STEPS: (297000, 396000)
+  # MAX_ITER: 450000 # o365=0.6M | 0.6M / 32 = 18750 iters | 18750 * 24 epochs = 450000 iters
+  IMS_PER_BATCH: 64 # it seems to work when 1gpu=8batch for A6000
+  STEPS: (188760, 251680)
+  MAX_ITER: 286000 # o365=0.61M | 0.61M / 64 = 9531 iters | 9531 * 30 epochs = 286000 iters
+  OPTIMIZER: "ADAMW"
+INPUT:
+  FORMAT: "RGB"
+  # MIN_SIZE_TRAIN: (640, 672, 704, 736, 768, 800)
+  MIN_SIZE_TRAIN: (480, 560, 640, 720, 800) # GLIP style
+VERSION: 2

@@ -1,0 +1,37 @@
+_BASE_: "../fewshot/odinw/_faster_base_fullft.yaml"
+MODEL:
+  META_ARCHITECTURE: "TwoStagePseudoLabGeneralizedRCNN"
+  MASK_ON: False
+  PROPOSAL_GENERATOR:
+    NAME: "PseudoLabRPN"
+  RPN:
+    POSITIVE_FRACTION: 0.25
+    LOSS: "CrossEntropy"
+  ROI_HEADS:
+    NUM_CLASSES: -1
+    NAME: "StandardROIHeadsPseudoLab"
+    LOSS: "FocalLoss"
+SOLVER:
+  LR_SCHEDULER_NAME: "WarmupMultiStepLR"
+  #   # === follow not the dynamic termination such as STEP_PATIENCE, but fixed train iters ===
+  # EPOCH_ITER: 'iter'
+  # USE_AUTOSTEP: False # turn off 'plateau' scheduler', and use WarmupMultiStepLR
+  # STEP_PATIENCE: -1
+  # AUTO_TERMINATE_PATIENCE: -1
+  # === or follow GLIP ===
+  EPOCH_ITER: 'epoch'
+  USE_AUTOSTEP: True
+  STEP_PATIENCE: 3
+  AUTO_TERMINATE_PATIENCE: 8
+KD:
+  BURN_UP_STEP: 10000
+  BBOX_THRESHOLD: 0.7
+  TEACHER_UPDATE_ITER: 1
+  EMA_KEEP_RATE: 0.999
+  LOSS_WEIGHT: 4.0
+  DISABLE_TEACHER_EVAL: True # eval only for student
+TEST:
+  EVAL_PERIOD: 100
+  EVAL_EPOCH: 1
+FEWSHOT:
+  FREEZE_METHOD: "distill_cdfsod"

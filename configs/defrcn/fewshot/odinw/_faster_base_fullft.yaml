@@ -1,0 +1,61 @@
+_BASE_: "../../../Base-RCNN-FPN.yaml" # based on FasterRCNN + FPN architecture
+MODEL:
+  META_ARCHITECTURE: "GeneralizedRCNN"
+  WEIGHTS: "./output/defrcn/swint_faster/coco_trained/base/swint_faster_rcnn_fpn_2x_ms/model_final.pth"
+  PIXEL_MEAN: [123.675, 116.28, 103.53]
+  PIXEL_STD: [58.395, 57.12, 57.375]
+  BACKBONE:
+    NAME: "build_swint_fpn_backbone"
+    # FREEZE_AT: 2 # freeze first stage of Swin-T
+    FREEZE_AT: -1 # unfreeze all parameters
+  SWINT:
+    OUT_FEATURES: ["stage2", "stage3", "stage4", "stage5"]
+  FPN:
+    IN_FEATURES: ["stage2", "stage3", "stage4", "stage5"]
+  RPN:
+    ENABLE_DECOUPLE: True
+    BACKWARD_SCALE: 0.0
+    FREEZE: False # Train RPN 
+  ROI_HEADS:
+    NUM_CLASSES: -1 # please setup here within overwritting cfg
+    ENABLE_DECOUPLE: True
+    BACKWARD_SCALE: 0.01 # 
+    FREEZE_FEAT: True # 
+    CLS_DROPOUT: True # 
+SOLVER:
+  IMS_PER_BATCH: 32
+  BASE_LR: 0.0001
+  BIAS_LR_FACTOR: 2.0 # following GLIP, double lr for bias parameters
+  WEIGHT_DECAY: 0.05
+  WEIGHT_DECAY_BIAS: 0.0 # following GLIP, set weight decay as 0.0 for bias parameters
+  OPTIMIZER: "ADAMW"
+  STEPS: (999998, 999999)
+  MAX_ITER: 1000000 # maximum iteration: useful for large-size dataset to apply short-training
+  # BASE_LR: 0.001
+  # OPTIMIZER: "SGD"
+  # === custom ===
+  CHECKPOINT_PERIOD: 1000000 # save only final checkpoint
+  MAX_EPOCH: 200
+  WARMUP_ITERS: 0
+  EPOCH_ITER: 'epoch'
+  CLIP_GRADIENTS:
+    ENABLED: True
+    CLIP_TYPE: "full_model"
+    CLIP_VALUE: 1.0
+    NORM_TYPE: 2.0
+  USE_AUTOSTEP: True
+  STEP_PATIENCE: 3
+  # === 
+INPUT:
+  FORMAT: "RGB"
+  # MIN_SIZE_TRAIN: (640, 672, 704, 736, 768, 800)
+  MIN_SIZE_TRAIN: (480, 560, 640, 720, 800) # GLIP style
+VERSION: 2
+SEED: 42 # set random seed
+TEST:
+  EVAL_EPOCH: 1 # eval every n epochs
+  PCB_ENABLE: True # for the training of base detector, pcb is not needed
+  PCB_MODELTYPE: 'swin_tiny_patch4_window7_224.ms_in1k'
+  PCB_RESIZE: 640
+FEWSHOT:
+  FREEZE_METHOD: 'defrcn'

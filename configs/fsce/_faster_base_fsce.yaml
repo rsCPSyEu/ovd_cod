@@ -1,0 +1,24 @@
+_BASE_: "../fewshot/odinw/_faster_base_fullft.yaml" # based on FasterRCNN + FPN architecture
+MODEL:
+  RPN:
+    POST_NMS_TOPK_TRAIN: 2000 # double the maximum number of proposals kept after NMS
+  ROI_HEADS:
+    NAME: "ContrastiveROIHeads"
+    NUM_CLASSES: -1
+    OUTPUT_LAYER: "CosineSimOutputLayers"
+    FREEZE_FEAT: False
+    BATCH_SIZE_PER_IMAGE: 256 # halving the number of sampled proposals in RoI Head, that are used for loss computation.
+    # SCORE_THRESH_TEST: 0.0
+  ROI_BOX_HEAD:
+    CONTRASTIVE_BRANCH:
+      TEMPERATURE: 0.2
+      LOSS_WEIGHT: 0.5
+      # DECAY: # original implementation in the official github 
+      #   ENABLED: True # turn on to add weight_decay on LOSS_WEIGHT \lambda, i.e., decrease \lambda for [\lambda * L_CPE]. 
+      #   STEPS: [6000, 10000] # decay steps
+      #   RATE: 0.5
+      DECAY: # In the original paper, it is said that \lambda is set to 0.5. (i.e., no decays) Thus, disable it.
+        ENABLED: False
+      IOU_THRESHOLD: 0.8  # high credibility proposals provide consistency
+FEWSHOT:
+  FREEZE_METHOD: fsce

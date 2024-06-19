@@ -1,0 +1,37 @@
+MODEL:
+  META_ARCHITECTURE: "ATSS"
+  WEIGHTS: "./checkpoints/swin_tiny_patch4_window7_224_d2.pth" # from IN1K-pre-trained
+  PIXEL_MEAN: [123.675, 116.28, 103.53]
+  PIXEL_STD: [58.395, 57.12, 57.375]
+  BACKBONE:
+    NAME: "build_retinanet_swint_fpn_dyhead_backbone"
+  SWINT:
+    OUT_FEATURES: ["stage3", "stage4", "stage5"]
+  FPN:
+    IN_FEATURES: ["stage3", "stage4", "stage5"]
+  DYHEAD:
+    NUM_CONVS: 6
+    CHANNELS: 256
+  ANCHOR_GENERATOR:
+    SIZES: !!python/object/apply:eval ["[[x*2,] for x in [32, 64, 128, 256, 512 ]]"]
+    ASPECT_RATIOS: [1.0,]
+    OFFSET: 0.5
+  ATSS:
+    NUM_CONVS: 0
+    NUM_CLASSES: 365 # no need to add background class
+DATASETS:
+  TRAIN: ("mix_coco_o365_train_100",) # 0.2M
+  TEST: ("object365_06m_val",)
+SOLVER:
+  BASE_LR: 0.0001
+  WEIGHT_DECAY: 0.05
+  WEIGHT_DECAY_BIAS: 0.05 # [fix error whten optimize]
+  IMS_PER_BATCH: 64 # it seems to work when 1gpu=8batch for A6000
+  STEPS: (61900, 82500)
+  MAX_ITER: 93750 # mix_100=0.2M | 0.2M / 64 = 3125 iters | 3125 * 30 epochs = 93750 iters
+  OPTIMIZER: "ADAMW"
+INPUT:
+  FORMAT: "RGB"
+  # MIN_SIZE_TRAIN: (640, 672, 704, 736, 768, 800)
+  MIN_SIZE_TRAIN: (480, 560, 640, 720, 800) # GLIP style
+VERSION: 2
