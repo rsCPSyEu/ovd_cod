@@ -92,10 +92,9 @@ conda install setuptools=59.5.0 -c conda-forge
 We provide finetuned weights for each dataset.
 
 DyHead
-| Methods | mAP[0.50:0.95] | | | | | | | | | | | | | | |
-| Seed | 0 | | | 1 | | | 2 | | | 3 | | | 4 | | |
-| Split | S1 | S2 | S3 | S1 | S2 | S3 | S1 | S2 | S3 | S1 | S2 | S3 | S1 | S2 | S3 |
-|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| Methods | mAP[0.50:0.95] | Seed 0 | | | Seed 1 | | | Seed 2 | | | Seed 3 | | | Seed 4 | | |
+|---------|----------------|--------|---|---|--------|---|---|--------|---|---|--------|---|---|--------|---|---|
+| Split   |                | S1     | S2| S3| S1     | S2| S3| S1     | S2| S3| S1     | S2| S3| S1     | S2| S3|
 <!-- | DyHead-Fullft | 10.0 | 10.0 | 10.0 | 10.0 | 10.0 | 10.0 | 10.0 | 10.0 | 10.0 | 10.0 | 10.0 | 10.0 | 10.0 | 10.0 | 10.0 |
 | DyHead-TFA | 10.0 | 10.0 | 10.0 | 10.0 | 10.0 | 10.0 | 10.0 | 10.0 | 10.0 | 10.0 | 10.0 | 10.0 | 10.0 | 10.0 | 10.0 | -->
 <!-- | OpenImages-Animal  | 37.8 $\pm$ 3.1 | 35.3 $\pm$ 3.9 | [model](https://www.dropbox.com/sh/ciw4dhy4dpcqptb/AAD5dpwKMRU06GwCcHO3SVEZa/models/OpenImages/animal/frcnn?dl=0&subfolder_nav_tracking=1) | [cfg](configs/OpenImages/animal)  |
