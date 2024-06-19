@@ -37,6 +37,8 @@ The folder structure is as follows:
     └── ...
 </pre>
 
+<pre>
+
 Then, put the files under ```datasets/odinw/fewshot_annotation_v1``` such as;
 ── datasets
     └── odinw
@@ -49,7 +51,7 @@ Then, put the files under ```datasets/odinw/fewshot_annotation_v1``` such as;
             │   └── ...
             ├── aquarium
             └── ...
-
+</pre>
 
 
 ## Evaluation Code
