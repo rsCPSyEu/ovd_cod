@@ -89,26 +89,7 @@ conda install setuptools=59.5.0 -c conda-forge
 
 
 ### Checkpoints
-We provide finetuned weights for each dataset.
-
-DyHead
-| Methods | mAP[0.50:0.95] | Seed 0 | | | Seed 1 | | | Seed 2 | | | Seed 3 | | | Seed 4 | | |
-|---------|----------------|--------|---|---|--------|---|---|--------|---|---|--------|---|---|--------|---|---|
-| Split   |                | S1     | S2| S3| S1     | S2| S3| S1     | S2| S3| S1     | S2| S3| S1     | S2| S3|
-<!-- | DyHead-Fullft | 10.0 | 10.0 | 10.0 | 10.0 | 10.0 | 10.0 | 10.0 | 10.0 | 10.0 | 10.0 | 10.0 | 10.0 | 10.0 | 10.0 | 10.0 |
-| DyHead-TFA | 10.0 | 10.0 | 10.0 | 10.0 | 10.0 | 10.0 | 10.0 | 10.0 | 10.0 | 10.0 | 10.0 | 10.0 | 10.0 | 10.0 | 10.0 | -->
-<!-- | OpenImages-Animal  | 37.8 $\pm$ 3.1 | 35.3 $\pm$ 3.9 | [model](https://www.dropbox.com/sh/ciw4dhy4dpcqptb/AAD5dpwKMRU06GwCcHO3SVEZa/models/OpenImages/animal/frcnn?dl=0&subfolder_nav_tracking=1) | [cfg](configs/OpenImages/animal)  |
-| OpenImages-Vehicle | 39.9 $\pm$ 8.7 | 17.0 $\pm$ 5.2 | [model](https://www.dropbox.com/sh/ciw4dhy4dpcqptb/AAB1-VcW0567GAGU8RwG05pva/models/OpenImages/vehicle/frcnn?dl=0&subfolder_nav_tracking=1) | [cfg](configs/OpenImages/vehicle) |
-| CUB200             | 62.2 $\pm$ 1.0 | 24.2 $\pm$ 1.9 | [model](https://www.dropbox.com/sh/ciw4dhy4dpcqptb/AABKvWYF0V2a2DFXc57OWfMYa/models/CUB200/frcnn?dl=0&subfolder_nav_tracking=1) | [cfg](configs/CUB200/random)      |
-| MTSD               | 50.0           |  3.1 $\pm$ 1.2 | [model](https://www.dropbox.com/sh/ciw4dhy4dpcqptb/AABwl_apMjIzcppW0GcZLzqna/models/MTSD/frcnn?dl=0&subfolder_nav_tracking=1) | [cfg](configs/MTSD/spclust)       | -->
-
-
-| Datasets | $\rm{AP}_{known}$ | $\rm{AP}_{unk}$ | models | config |
-|:---:|:---:|:---:|:---:|:---:|
-| OpenImages-Animal  | 37.8 $\pm$ 3.1 | 35.3 $\pm$ 3.9 | [model](https://www.dropbox.com/sh/ciw4dhy4dpcqptb/AAD5dpwKMRU06GwCcHO3SVEZa/models/OpenImages/animal/frcnn?dl=0&subfolder_nav_tracking=1) | [cfg](configs/OpenImages/animal)  |
-| OpenImages-Vehicle | 39.9 $\pm$ 8.7 | 17.0 $\pm$ 5.2 | [model](https://www.dropbox.com/sh/ciw4dhy4dpcqptb/AAB1-VcW0567GAGU8RwG05pva/models/OpenImages/vehicle/frcnn?dl=0&subfolder_nav_tracking=1) | [cfg](configs/OpenImages/vehicle) |
-| CUB200             | 62.2 $\pm$ 1.0 | 24.2 $\pm$ 1.9 | [model](https://www.dropbox.com/sh/ciw4dhy4dpcqptb/AABKvWYF0V2a2DFXc57OWfMYa/models/CUB200/frcnn?dl=0&subfolder_nav_tracking=1) | [cfg](configs/CUB200/random)      |
-| MTSD               | 50.0           |  3.1 $\pm$ 1.2 | [model](https://www.dropbox.com/sh/ciw4dhy4dpcqptb/AABwl_apMjIzcppW0GcZLzqna/models/MTSD/frcnn?dl=0&subfolder_nav_tracking=1) | [cfg](configs/MTSD/spclust)       |
+We provide finetuned checkpoints for each dataset. Please donwload them from our [dropbox](https://www.dropbox.com/scl/fo/18rdkaxwvvc4xw584hx9c/AN5dHc-3k9etlbtX9eMpgYc?rlkey=ryfnxyfzch1fmc5ms501sadbu&st=hox2q01i&dl=0).
 
 
 ### Run evaluation
@@ -117,7 +98,7 @@ To evaluate the finetuning results with test data, follow the instruction below.
 - For the number of few-shot samples, select one from ["1_200_8", "3_200_4", "5_200_2", "10_200_1"] and set it to ```shot```.
 - For task configuration, see ```configs/odinw_configs.txt``` and set the config path to ```task_config```.
 - For random seeds for few-shot sampling, select one from [0,1,2,3,4] and set ```run_seedv1```.
-- For finetuned weight, please donwload from [here]() and set the correct path to ```weight```.
+- For finetuned checkpoints, set the correct path to ```weight```.
 
 Then, run the following;
 <pre>
@@ -133,7 +114,7 @@ run_seedv1=0 # select from [0,1,2,3,4]
 # Example: use 'aquarium' dataset
 task_config=configs/odinw_35/Aquarium_Aquarium_Combined.v2-raw-1024.coco.yaml
 
-weight=/path/to/finetuned/weight
+weight=/path/to/finetuned/ckpt
 
 output_dir=/path/to/output/dir
 
