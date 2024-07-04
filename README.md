@@ -18,7 +18,7 @@ python download.py --dataset_path ./datasets/odinw
 </pre>
 
 
-### Donload Our Few-shot Datasets for Training 
+### Download Our Few-shot Datasets for Training 
 
 Please visit our [dropbox](https://www.dropbox.com/scl/fo/18rdkaxwvvc4xw584hx9c/AN5dHc-3k9etlbtX9eMpgYc?rlkey=ryfnxyfzch1fmc5ms501sadbu&st=hox2q01i&dl=0) to download the corresponding annotation file for each random seed.
                            
